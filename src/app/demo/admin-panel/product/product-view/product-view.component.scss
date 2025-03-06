@@ -1,0 +1,21 @@
+/* Kartların genel boyutunu küçült */
+.card {
+    height: 300px; /* Kart yüksekliği */
+    margin-bottom: 15px; /* Kartlar arası boşluk */
+  }
+  
+  /* Resimlerin boyutunu küçült */
+  .card img {
+    height: 150px; /* Resim yüksekliği */
+    object-fit: cover; /* Resimlerin oranını koru */
+  }
+  
+  /* Kart başlığı ve butonlar için stil */
+  .card-title {
+    font-size: 1rem; /* Başlık boyutu */
+  }
+  
+  .btn {
+    font-size: 0.8rem; /* Buton yazı boyutu */
+    padding: 5px 10px; /* Buton iç boşluk */
+  }

@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-12">
+    <app-card cardTitle="Customer Information">
+      <form [formGroup]="customerAddForm" (ngSubmit)="add()">
+        <div class="row">
+          <!-- Customer Name -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Customer Name</label>
+              <input type="text" class="form-control" formControlName="customerName" placeholder="Enter customer name" required />
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-control" formControlName="location" placeholder="Enter location" required />
+            </div>
+          </div>
+
+        <!-- Gender -->
+<div class="col-md-6">
+  <div class="mb-3">
+    <label class="form-label">Gender</label>
+    <select class="form-select" formControlName="gender" required>
+      <option value="" disabled selected>Select gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </div>
+</div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" placeholder="Enter email" required />
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Phone Number</label>
+              <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Enter phone number" required />
+            </div>
+          </div>
+
+          <!-- Image Path -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Profile Image</label>
+              <select class="form-select" formControlName="imagePath">
+                <option *ngFor="let image of images" [value]="image">{{ image }}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="!customerAddForm.valid">Add Customer</button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>

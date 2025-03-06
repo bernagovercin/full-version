@@ -1,0 +1,157 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [showHeader]="false" cardClass="table-card customer-list">
+      <form>
+        <div class="datatable-top">
+          <div class="dattable-search">
+            <input
+              id="table-complete-search"
+              type="text"
+              class="form-control"
+              name="searchTerm"
+              [(ngModel)]="service.searchTerm"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+        <div class="datatable-dropdown">
+          <ul class="list-unstyled d-inline-flex align-items-center">
+            <!-- Kopyalama Butonu -->
+            <li>
+              <div class="avatar avatar-s">
+                <i class="ti ti-copy f-24 text-muted" ngbTooltip="Copy" (click)="copyTable()"></i>
+              </div>
+            </li>
+            <!-- Yazdırma Butonu -->
+            <li>
+              <div class="avatar avatar-s">
+                <i class="ti ti-printer f-24 text-muted" ngbTooltip="Print" (click)="printTable()"></i>
+              </div>
+            </li>
+            <!-- CSV Butonu -->
+            <li>
+              <div class="avatar avatar-s">
+                <i class="ti ti-download f-24 text-muted" ngbTooltip="Download CSV" (click)="downloadCSV()"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        
+        <div class="table-responsive dt-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col"><input class="form-check-input" type="checkbox" title="checkbox" /></th>
+                <th scope="col" sortable="id">ID</th>
+                <th scope="col" sortable="customer_name">CUSTOMER NAME</th>
+                <th scope="col" sortable="branch">BRANCH</th>
+                <th scope="col" sortable="payment_type">PAYMENT TYPE</th>
+                <th scope="col" sortable="quantity">QUANTITY</th>
+                <th scope="col" sortable="registered">REGISTERED</th>
+                <th scope="col" sortable="status">STATUS</th>
+                <th scope="col" sortable="action" class="text-center">ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let error of errorList$ | async">
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" title="checkbox" />
+                  </div>
+                </td>
+                <td>{{ error.id }}</td>
+                <td><ngb-highlight [result]="error.customer_name" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="error.branch" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="error.payment_type" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="error.quantity" [term]="service.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="error.registered" [term]="service.searchTerm"></ngb-highlight></td>
+                <td>
+                  <ngb-highlight
+                    [result]="error.status"
+                    [term]="service.searchTerm"
+                    class="badge"
+                    [ngClass]="{
+                      'bg-light-primary': error.status === 'Processing',
+                      'bg-light-success': error.status === 'Complete',
+                      'bg-light-danger': error.status === 'Pending'
+                    }"
+                  ></ngb-highlight>
+                </td>
+                <td class="text-center">
+                  <ul class="list-inline me-auto mb-0">
+                    <!-- Düzenleme butonu -->
+                    <li class="list-inline-item align-bottom">
+                      <a href="javascript:" class="avatar avatar-xs btn-link-secondary" ngbTooltip="Edit" (click)="editError(errorDetails, error)">
+                        <i class="ti ti-pencil f-20"></i>
+                      </a>
+                    </li>
+                    <!-- Silme butonu -->
+                    <li class="list-inline-item align-bottom">
+                      <a href="javascript:" ngbTooltip="Delete" class="avatar avatar-xs btn-link-secondary" (click)="deleteError(errorDetails, error)">
+                        <i class="ti ti-trash f-20"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-sm-flex justify-content-between align-items-center p-2">
+          <select class="form-select" title="select item per page" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+          </select>
+          <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize" class="ms-3"></ngb-pagination>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>
+
+<!-- Modal Form: Edit and Delete Error -->
+<ng-template #errorDetails let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title d-flex align-items-center">
+        <i-feather name="edit" class="icon-svg-primary wid-20 me-2"></i-feather>
+        Edit or Delete Error
+      </h5>
+      <button type="button" class="btn-close" (click)="modal.close()"></button>
+    </div>
+    <form>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Error ID</label>
+          <input type="text" class="form-control" placeholder="Enter Error ID" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Customer Name</label>
+          <input type="text" class="form-control" placeholder="Enter Customer Name" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Branch</label>
+          <input type="text" class="form-control" placeholder="Enter Branch" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Payment Type</label>
+          <input type="text" class="form-control" placeholder="Enter Payment Type" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Quantity</label>
+          <input type="text" class="form-control" placeholder="Enter Quantity" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Status</label>
+          <input type="text" class="form-control" placeholder="Enter Status" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="modal.close()" class="btn btn-light-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="modal.close()" class="btn btn-light-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

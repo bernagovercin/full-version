@@ -1,0 +1,117 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [showHeader]="false" cardClass="table-card customer-list">
+      <form>
+        <div class="datatable-top">
+          <div class="dattable-search">
+            <input
+              id="table-complete-search"
+              type="text"
+              class="form-control"
+              name="searchTerm"
+              [(ngModel)]="service.searchTerm"
+              placeholder="Search..."
+            />
+          </div>
+          <div class="datatable-dropdown">
+            <ul class="list-unstyled d-inline-flex align-items-center">
+              <li>
+                <div class="avatar avatar-s">
+                  <i class="ti ti-copy f-24 text-muted" ngbTooltip="copy"></i>
+                </div>
+              </li>
+              <li>
+                <div class="avatar avatar-s">
+                  <i class="ti ti-printer f-24 text-muted" ngbTooltip="printer"></i>
+                </div>
+              </li>
+              <li>
+                <div class="avatar avatar-s">
+                  <i class="ti ti-adjustments-horizontal f-24 text-muted" ngbTooltip="filters"></i>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-responsive dt-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col"><input class="form-check-input" type="checkbox" title="checkbox" /></th>
+                <th scope="col" sortable="id">ID</th>
+                <th scope="col" sortable="customer_name">CUSTOMER NAME</th>
+                <th scope="col" sortable="branch">BRANCH</th>
+                <th scope="col" sortable="payment_type">PAYMENT TYPE</th>
+                <th scope="col" sortable="quantity">QUANTITY</th>
+                <th scope="col" sortable="registered">REGISTERED</th>
+                <th scope="col" sortable="status">STATUS</th>
+                <th scope="col" sortable="action" class="text-center">ACtions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of orderList$ | async; track order) {
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" title="checkbox" />
+                    </div>
+                  </td>
+                  <td>{{ order.id }}</td>
+                  <td>
+                    <ngb-highlight [result]="order.customer_name" [term]="service.searchTerm" class="h5 mb-0"></ngb-highlight>
+                  </td>
+                  <td><ngb-highlight [result]="order.branch" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="order.payment_type" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="order.quantity" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="order.registered" [term]="service.searchTerm"></ngb-highlight></td>
+                  <td>
+                    @if (order.status === 'Processing') {
+                      <ngb-highlight
+                        [result]="order.status"
+                        [term]="service.searchTerm"
+                        class="badge bg-light-primary rounded-pill f-12"
+                      ></ngb-highlight>
+                    } @else if (order.status === 'Complete') {
+                      <ngb-highlight
+                        [result]="order.status"
+                        [term]="service.searchTerm"
+                        class="badge bg-light-success rounded-pill f-12"
+                      ></ngb-highlight>
+                    } @else if (order.status === 'Pending') {
+                      <ngb-highlight
+                        [result]="order.status"
+                        [term]="service.searchTerm"
+                        class="badge bg-light-danger rounded-pill f-12"
+                      ></ngb-highlight>
+                    }
+                  </td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-icon btn-link-primary">
+                      <i class="ti ti-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-icon btn-link-secondary">
+                      <i class="ti ti-pencil"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <div class="d-sm-flex justify-content-between align-items-center p-2">
+          <select class="form-select" title="select item per page" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+          </select>
+          <ngb-pagination
+            [collectionSize]="(total$ | async)!"
+            [(page)]="service.page"
+            [pageSize]="service.pageSize"
+            class="ms-3"
+          ></ngb-pagination>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>

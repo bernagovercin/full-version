@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-12">
+    <app-card cardTitle="User Identification">
+      <form [formGroup]="userAddForm" (ngSubmit)="add()">
+        <div class="row">
+          <!-- Citizen ID -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Citizen ID</label>
+              <input type="number" class="form-control" formControlName="citizenId" placeholder="Citizen ID girin" required />
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" formControlName="fullName" placeholder="Tam ad girin" required />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" placeholder="Email girin" required />
+            </div>
+          </div>
+
+          <!-- Mobile Phones -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Mobile Phones</label>
+              <input type="text" class="form-control" formControlName="mobilePhones" placeholder="Telefon numarası girin" required />
+            </div>
+          </div>
+
+          <!-- Gender -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Gender</label>
+              <select class="form-select" formControlName="gender">
+                <option [value]="0">human</option>
+                <option [value]="1">woman</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Birth Date -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Birth Date</label>
+              <input type="date" class="form-control" formControlName="birthDate" required />
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input type="text" class="form-control" formControlName="address" placeholder="Adres girin" required />
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="col-md-12">
+            <div class="mb-3">
+              <label class="form-label">Notes</label>
+              <textarea class="form-control" formControlName="notes" rows="2" placeholder="Notlarınızı girin"></textarea>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" formControlName="password" placeholder="Şifre girin" required />
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="!userAddForm.valid">User Add</button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>

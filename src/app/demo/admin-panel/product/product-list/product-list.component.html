@@ -1,0 +1,170 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card table-card customer-list">
+      <form>
+        <div class="datatable-top">
+          <div class="dattable-search">
+            <input
+              id="table-complete-search"
+              type="text"
+              class="form-control"
+              name="searchTerm"
+              [(ngModel)]="service.searchTerm"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><input class="form-check-input" type="checkbox" title="checkbox" /></th>
+                <th scope="col" sortable="images">#</th>
+                <th scope="col" sortable="id">ID</th>
+                <th scope="col" sortable="productName">Product Name</th>
+                <th scope="col" sortable="category">Category</th>
+                <th scope="col" sortable="colorName">Color</th>
+                <th scope="col" sortable="size">Size</th>
+                <th scope="col" sortable="quantity">Quantity</th>
+                <th scope="col" sortable="price">Price</th>
+                <th scope="col" sortable="status">Status</th>
+                <th scope="col" sortable="action" class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of productList$ | async">
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" title="checkbox" />
+                  </div>
+                </td>
+                <td>
+                  <img [src]="'assets/images/product/' + product.imagePath" alt="product-image" class="wid-50 rounded" />
+                </td>
+                <td>{{ product.id }}</td>
+                <td>{{ product.productName }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.colorName }}</td>
+                <td>{{ product.size }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                  <span class="badge" [ngClass]="{
+                    'bg-light-success': product.status,
+                    'bg-light-danger': !product.status
+                  }">
+                    {{ product.status ? 'Active' : 'Inactive' }}
+                  </span>
+                </td>
+                <td class="text-center">
+                  <ul class="list-inline me-auto mb-0">
+                    <li class="list-inline-item align-bottom">
+                      <a href="javascript:" class="avatar avatar-xs btn-link-secondary" ngbTooltip="Edit" (click)="editProduct(product)">
+                        <i class="ti ti-edit f-20"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item align-bottom">
+                      <a href="javascript:" ngbTooltip="Delete" class="avatar avatar-xs btn-link-secondary" (click)="deleteProduct(product)">
+                        <i class="ti ti-trash f-20"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-sm-flex justify-content-between align-items-center p-2">
+          <select
+            class="form-select mb-2 mb-sm-0"
+            title="select item per page"
+            style="width: auto"
+            name="pageSize"
+            [(ngModel)]="service.pageSize"
+          >
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+          </select>
+          <ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize"></ngb-pagination>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Form: Edit Product -->
+<ng-template #editProductModal let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title d-flex align-items-center">
+        <i-feather name="edit" class="icon-svg-primary wid-20 me-2"></i-feather>
+        Edit Product
+      </h5>
+      <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form (ngSubmit)="saveChanges()">
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Product Name</label>
+          <input type="text" class="form-control" [(ngModel)]="selectedProduct.productName" name="productName" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+          <input type="text" class="form-control" [(ngModel)]="selectedProduct.category" name="category" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Color</label>
+          <input type="text" class="form-control" [(ngModel)]="selectedProduct.colorName" name="colorName" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Size</label>
+          <input type="text" class="form-control" [(ngModel)]="selectedProduct.size" name="size" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Quantity</label>
+          <input type="number" class="form-control" [(ngModel)]="selectedProduct.quantity" name="quantity" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Price</label>
+          <input type="number" class="form-control" [(ngModel)]="selectedProduct.price" name="price" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Status</label>
+          <select class="form-select" [(ngModel)]="selectedProduct.status" name="status">
+            <option [ngValue]="true">Active</option>
+            <option [ngValue]="false">Inactive</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light-danger" (click)="modal.dismiss('Cancel click')">Cancel</button>
+        <button type="submit" class="btn btn-light-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!-- Modal Form: Delete Product -->
+<ng-template #deleteProductModal let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title d-flex align-items-center">
+        <i-feather name="trash" class="icon-svg-primary wid-20 me-2"></i-feather>
+        Delete Product
+      </h5>
+      <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form (ngSubmit)="confirmDelete()">
+      <div class="modal-body">
+        <p>Are you sure you want to delete this product?</p>
+        <input type="hidden" [(ngModel)]="selectedProduct.id" name="id" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light-danger" (click)="modal.dismiss('Cancel click')">Cancel</button>
+        <button type="submit" class="btn btn-light-primary">Delete</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

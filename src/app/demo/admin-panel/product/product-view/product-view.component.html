@@ -1,0 +1,156 @@
+<app-card cardTitle="Products">
+  <!-- Add Product Button -->
+  <ng-template #headerOptionsTemplate>
+    <a [routerLink]="['/product/add']" class="btn btn-primary">Add Product</a>
+  </ng-template>
+
+  <!-- Carousel Section -->
+  <div class="row">
+    <!-- Carousel 1 -->
+    <div class="col-sm-4">
+      <app-card cardTitle="Blue Jacket">
+        <ngb-carousel
+          [showNavigationIndicators]="false"
+          #carousel1
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/mavi-ceket-jpg.jpg" alt="Beyaz Ceket" />
+          </ng-template>
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/gigi-jpg.jpg" alt="Siyah Jean" />
+          </ng-template>
+        </ngb-carousel>
+        <button type="button" (click)="togglePaused(carousel1)" class="btn btn-outline-dark btn-sm mt-2">
+          {{ paused ? 'Cycle' : 'Pause' }}
+        </button>
+      </app-card>
+    </div>
+
+    <!-- Carousel 2 -->
+    <div class="col-sm-4">
+      <app-card cardTitle="White-Green Jacket ">
+        <ngb-carousel
+          [showNavigationIndicators]="false"
+          #carousel2
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/yesil-ceket.jpg" alt="Deri Pantolon" />
+          </ng-template>
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/beyaz-ceket.jpg" alt="Gigi" />
+          </ng-template>
+        </ngb-carousel>
+        <button type="button" (click)="togglePaused(carousel2)" class="btn btn-outline-dark btn-sm mt-2">
+          {{ paused ? 'Cycle' : 'Pause' }}
+        </button>
+      </app-card>
+    </div>
+
+    <!-- Carousel 3 -->
+    <div class="col-sm-4">
+      <app-card cardTitle="Trousers">
+        <ngb-carousel
+          [showNavigationIndicators]="false"
+          #carousel3
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/deri-pantolon.jpg" alt="Gri Ceket" />
+          </ng-template>
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/bol-siyah-jean.jpg" alt="Gri Jean" />
+          </ng-template>
+        </ngb-carousel>
+        <button type="button" (click)="togglePaused(carousel3)" class="btn btn-outline-dark btn-sm mt-2">
+          {{ paused ? 'Cycle' : 'Pause' }}
+        </button>
+      </app-card>
+    </div>
+  </div>
+
+  <!-- Second Row of Carousels -->
+  <div class="row mt-3">
+    <!-- Carousel 4 -->
+    <div class="col-sm-4">
+      <app-card cardTitle="Red Jacket">
+        <ngb-carousel
+          [showNavigationIndicators]="false"
+          #carousel4
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/deri-pantolon.jpg" alt="Kahve Ceket" />
+          </ng-template>
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/kirmizi-ceket.jpg" alt="Kırmızı Ceket" />
+          </ng-template>
+        </ngb-carousel>
+        <button type="button" (click)="togglePaused(carousel4)" class="btn btn-outline-dark btn-sm mt-2">
+          {{ paused ? 'Cycle' : 'Pause' }}
+        </button>
+      </app-card>
+    </div>
+
+    <!-- Carousel 5 -->
+    <div class="col-sm-4">
+      <app-card cardTitle="Gray Suit">
+        <ngb-carousel
+          [showNavigationIndicators]="false"
+          #carousel5
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/gri-jean.jpg" alt="Mavi Ceket" />
+          </ng-template>
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/gri-ceket.jpg" alt="Siyah Ceket" />
+          </ng-template>
+        </ngb-carousel>
+        <button type="button" (click)="togglePaused(carousel5)" class="btn btn-outline-dark btn-sm mt-2">
+          {{ paused ? 'Cycle' : 'Pause' }}
+        </button>
+      </app-card>
+    </div>
+
+    <!-- Carousel 6 -->
+    <div class="col-sm-4">
+      <app-card cardTitle="Beige Suit">
+        <ngb-carousel
+          [showNavigationIndicators]="false"
+          #carousel6
+          [interval]="3000"
+          [pauseOnHover]="pauseOnHover"
+          [pauseOnFocus]="pauseOnFocus"
+          (slide)="onSlide($event)"
+        >
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/kahve-ceket.jpg" alt="Siyah Jean" />
+          </ng-template>
+          <ng-template ngbSlide>
+            <img class="img-fluid d-block w-100" src="assets/images/product/mavi-ceket-jpg.jpg" alt="Yeşil Ceket" />
+          </ng-template>
+        </ngb-carousel>
+        <button type="button" (click)="togglePaused(carousel6)" class="btn btn-outline-dark btn-sm mt-2">
+          {{ paused ? 'Cycle' : 'Pause' }}
+        </button>
+      </app-card>
+    </div>
+  </div>
+</app-card>

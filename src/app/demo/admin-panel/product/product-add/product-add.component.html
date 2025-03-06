@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-12">
+    <app-card cardTitle="Product Add">
+      <form [formGroup]="productAddForm" (ngSubmit)="add()">
+        <div class="row">
+          <!-- Product Name -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Product Name</label>
+              <input type="text" class="form-control" formControlName="productName" placeholder="Enter product name" required />
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Category</label>
+              <input type="text" class="form-control" formControlName="category" placeholder="Enter category" required />
+            </div>
+          </div>
+
+          <!-- Color Name -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Color Name</label>
+              <input type="text" class="form-control" formControlName="colorName" placeholder="Enter color name" required />
+            </div>
+          </div>
+
+          <!-- Size -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Size</label>
+              <select class="form-select" formControlName="size" required>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Quantity</label>
+              <input type="number" class="form-control" formControlName="quantity" placeholder="Enter quantity" required />
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" formControlName="price" placeholder="Enter price" required />
+            </div>
+          </div>
+
+          <!-- Image Path -->
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Product Image</label>
+              <select class="form-select" formControlName="imagePath" required>
+                <option *ngFor="let image of images" [value]="image">{{ image }}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-md-12 text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="!productAddForm.valid">Create Product</button>
+          </div>
+        </div>
+      </form>
+    </app-card>
+  </div>
+</div>
