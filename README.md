@@ -1,19 +1,66 @@
-# Berry-Angular-ng-bootstrap
+# Bilgisayar Mühendisliği Lisans Bitirme Projesi Frontend 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0
+Bu proje, Sipariş Yönetim Sistemi ve Hata Yönetim Sistemi olmak üzere iki ana bölümden oluşmaktadır. Angular 19 kullanılarak geliştirilmiştir. Proje, kullanıcıların siparişlerini ve hatalarını yönetmelerine olanak tanır.
 
-## Development server
+## Teknolojiler 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Angular 19
 
-## Code scaffolding
+TypeScript
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+HTML5, CSS3
+## Kurulum 
 
-## Build
+Projeyi Klonlayın:
+ git clone https://github.com/full-version.git
+cd full-version
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Gerekli Bağımlılıkları Yükelyin: 
+npm install
+npm i --legacy-peer-deps
 
-## Further help
+Projeyi çalıştırın: 
+ng serve
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Taratıcıda Görüntüleyin:
+
+http://localhost:4200 
+
+## Proje Yapısı
+
+Proje iki ana bölümden oluşmaktadır:
+
+Sipariş Yönetim Sistemi: Sipariş oluşturma, düzenleme, silme ve listeleme işlemleri. Sipariş durumlarını takip etme.
+
+Hata Yönetim Sistemi: Hata kaydı oluşturma, güncelleme ve çözümleme. Hata durumlarını takip etme.
+
+## Giriş Yapma Zorunluluğunu Kaldırma 
+Projede sayfalara erişim için giriş yapma zorunluluğu bulunmaktadır. Bu zorunluluğu kaldırmak için aşağıdaki adımları izleyebilirsiniz:
+
+Routing Dosyasını Düzenleyin:
+app-routing.module.ts dosyasında canActivate ile korunan route'ları bulun ve bu korumayı kaldırın.
+
+Auth Guard'ı Devre Dışı Bırakın:
+ canActivate için kullanılan  AuthGuardı,  route'lardan kaldırın.
+
+## Katkıda Bulunam 
+
+Projeye katkıda bulunmak isterseniz:
+
+Fork edin.
+
+Yeni bir branch oluşturun (git checkout -b yeni-ozellik).
+
+Değişikliklerinizi commit edin (git commit -m 'Yeni özellik eklendi').
+
+Branch'i pushlayın (git push origin yeni-ozellik).
+
+Pull Request oluşturun.
+
+## Lisans 
+
+Bu proje MIT Lisansı ile lisanslanmıştır
+
+## İletişim 
+
+Proje ile ilgili sorularınız veya geri bildirimleriniz için bana e-posta veya GitHub üzerinden ulaşabilirsiniz.
