@@ -17,6 +17,7 @@ cd full-version
 
 Gerekli Bağımlılıkları Yükelyin: 
 npm install
+
 npm i --legacy-peer-deps
 
 Projeyi çalıştırın: 
